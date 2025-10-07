@@ -75,7 +75,7 @@ const HeatmapCard = ({ data = [] }) => {
             <div key={rowIndex} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
 {row.map((area, cellIndex) => (
                 <motion.div
-                  key={`${rowIndex}-${area.area}-${cellIndex}`}
+                  key={`${rowIndex}-${cellIndex}`}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: rowIndex * 0.1 }}
