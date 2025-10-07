@@ -30,67 +30,92 @@ function AppContent() {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const { ApperClient, ApperUI } = window.ApperSDK;
-    
-    const client = new ApperClient({
-      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-    });
-    
-    ApperUI.setup(client, {
-      target: '#authentication',
-      clientId: import.meta.env.VITE_APPER_PROJECT_ID,
-      view: 'both',
-      onSuccess: function (user) {
-        setIsInitialized(true);
-        let currentPath = window.location.pathname + window.location.search;
-        let redirectPath = new URLSearchParams(window.location.search).get('redirect');
-        const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup') || 
-                           currentPath.includes('/callback') || currentPath.includes('/error') || 
-                           currentPath.includes('/prompt-password') || currentPath.includes('/reset-password');
+    const initializeAuth = async () => {
+      try {
+        // Wait for SDK to be available
+        let attempts = 0;
+        const maxAttempts = 100; // 10 seconds maximum wait
         
-        if (user) {
-          if (redirectPath) {
-            navigate(redirectPath);
-          } else if (!isAuthPage) {
-            if (!currentPath.includes('/login') && !currentPath.includes('/signup')) {
-              navigate(currentPath);
-            } else {
-              navigate('/');
-            }
-          } else {
-            navigate('/');
-          }
-          dispatch(setUser(JSON.parse(JSON.stringify(user))));
-        } else {
-          if (!isAuthPage) {
-            navigate(
-              currentPath.includes('/signup')
-                ? `/signup?redirect=${currentPath}`
-                : currentPath.includes('/login')
-                ? `/login?redirect=${currentPath}`
-                : '/login'
-            );
-          } else if (redirectPath) {
-            if (
-              !['error', 'signup', 'login', 'callback', 'prompt-password', 'reset-password'].some((path) => currentPath.includes(path))
-            ) {
-              navigate(`/login?redirect=${redirectPath}`);
-            } else {
-              navigate(currentPath);
-            }
-          } else if (isAuthPage) {
-            navigate(currentPath);
-          } else {
-            navigate('/login');
-          }
-          dispatch(clearUser());
+        while (!window.ApperSDK && attempts < maxAttempts) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          attempts++;
         }
-      },
-      onError: function(error) {
-        console.error("Authentication failed:", error);
+        
+        if (!window.ApperSDK) {
+          console.error("Apper SDK failed to load");
+          setIsInitialized(true);
+          return;
+        }
+        
+        const { ApperClient, ApperUI } = window.ApperSDK;
+        
+        const client = new ApperClient({
+          apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+          apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+        });
+        
+        ApperUI.setup(client, {
+          target: '#authentication',
+          clientId: import.meta.env.VITE_APPER_PROJECT_ID,
+          view: 'both',
+          onSuccess: function (user) {
+            setIsInitialized(true);
+            let currentPath = window.location.pathname + window.location.search;
+            let redirectPath = new URLSearchParams(window.location.search).get('redirect');
+            const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup') || 
+                               currentPath.includes('/callback') || currentPath.includes('/error') || 
+                               currentPath.includes('/prompt-password') || currentPath.includes('/reset-password');
+            
+            if (user) {
+              if (redirectPath) {
+                navigate(redirectPath);
+              } else if (!isAuthPage) {
+                if (!currentPath.includes('/login') && !currentPath.includes('/signup')) {
+                  navigate(currentPath);
+                } else {
+                  navigate('/');
+                }
+              } else {
+                navigate('/');
+              }
+              dispatch(setUser(JSON.parse(JSON.stringify(user))));
+            } else {
+              if (!isAuthPage) {
+                navigate(
+                  currentPath.includes('/signup')
+                    ? `/signup?redirect=${currentPath}`
+                    : currentPath.includes('/login')
+                    ? `/login?redirect=${currentPath}`
+                    : '/login'
+                );
+              } else if (redirectPath) {
+                if (
+                  !['error', 'signup', 'login', 'callback', 'prompt-password', 'reset-password'].some((path) => currentPath.includes(path))
+                ) {
+                  navigate(`/login?redirect=${redirectPath}`);
+                } else {
+                  navigate(currentPath);
+                }
+              } else if (isAuthPage) {
+                navigate(currentPath);
+              } else {
+                navigate('/login');
+              }
+              dispatch(clearUser());
+            }
+          },
+          onError: function(error) {
+            console.error("Authentication failed:", error);
+            setIsInitialized(true);
+          }
+        });
+      } catch (error) {
+        console.error("Error initializing authentication:", error);
+        setIsInitialized(true);
       }
-    });
+    };
+    
+    initializeAuth();
   }, []);
 
   const authMethods = {
