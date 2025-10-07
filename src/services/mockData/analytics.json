@@ -33,7 +33,7 @@
     { "reason": "Vehicle breakdown", "count": 1, "percentage": 6.7 },
     { "reason": "Address not found", "count": 1, "percentage": 6.7 }
   ],
-  "hourlyDistribution": [
+"hourlyDistribution": [
     { "hour": 8, "deliveries": 12 },
     { "hour": 9, "deliveries": 24 },
     { "hour": 10, "deliveries": 35 },
@@ -44,5 +44,27 @@
     { "hour": 15, "deliveries": 52 },
     { "hour": 16, "deliveries": 41 },
     { "hour": 17, "deliveries": 32 }
+  ],
+  "deliveryHeatmap": [
+    { "area": "Financial District", "deliveries": 142, "lat": 37.7946, "lng": -122.3999 },
+    { "area": "SoMa", "deliveries": 128, "lat": 37.7749, "lng": -122.4194 },
+    { "area": "Mission District", "deliveries": 115, "lat": 37.7599, "lng": -122.4148 },
+    { "area": "Nob Hill", "deliveries": 98, "lat": 37.7928, "lng": -122.4158 },
+    { "area": "Castro", "deliveries": 87, "lat": 37.7609, "lng": -122.4350 },
+    { "area": "Marina District", "deliveries": 76, "lat": 37.8021, "lng": -122.4365 },
+    { "area": "Haight-Ashbury", "deliveries": 69, "lat": 37.7694, "lng": -122.4469 },
+    { "area": "Pacific Heights", "deliveries": 64, "lat": 37.7936, "lng": -122.4372 },
+    { "area": "North Beach", "deliveries": 58, "lat": 37.8006, "lng": -122.4103 },
+    { "area": "Chinatown", "deliveries": 52, "lat": 37.7941, "lng": -122.4078 },
+    { "area": "Russian Hill", "deliveries": 48, "lat": 37.8009, "lng": -122.4187 },
+    { "area": "Potrero Hill", "deliveries": 45, "lat": 37.7587, "lng": -122.3988 },
+    { "area": "Dogpatch", "deliveries": 41, "lat": 37.7599, "lng": -122.3875 },
+    { "area": "Bernal Heights", "deliveries": 38, "lat": 37.7419, "lng": -122.4153 },
+    { "area": "Sunset District", "deliveries": 34, "lat": 37.7582, "lng": -122.4943 },
+    { "area": "Richmond District", "deliveries": 31, "lat": 37.7796, "lng": -122.4796 },
+    { "area": "Presidio", "deliveries": 28, "lat": 37.7989, "lng": -122.4662 },
+    { "area": "Twin Peaks", "deliveries": 22, "lat": 37.7544, "lng": -122.4477 },
+    { "area": "Japantown", "deliveries": 19, "lat": 37.7853, "lng": -122.4306 },
+    { "area": "Bayview", "deliveries": 15, "lat": 37.7345, "lng": -122.3897 }
   ]
 }

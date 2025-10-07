@@ -28,6 +28,11 @@ const analyticsService = {
     return [...analyticsData.hourlyDistribution];
   },
 
+  async getDeliveryHeatmap() {
+    await delay(300);
+    return [...analyticsData.deliveryHeatmap];
+  },
+
   async getSummary() {
     await delay(350);
     return {
@@ -37,5 +42,4 @@ const analyticsService = {
     };
   }
 };
-
 export default analyticsService;

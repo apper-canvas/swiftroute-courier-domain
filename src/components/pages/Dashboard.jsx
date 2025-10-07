@@ -10,29 +10,32 @@ import Error from "@/components/ui/Error";
 import StatCard from "@/components/molecules/StatCard";
 import DeliveryMap from "@/components/organisms/DeliveryMap";
 import DeliveryCard from "@/components/organisms/DeliveryCard";
-
+import HeatmapCard from "@/components/organisms/HeatmapCard";
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [parcels, setParcels] = useState([]);
+const [parcels, setParcels] = useState([]);
   const [drivers, setDrivers] = useState([]);
   const [stats, setStats] = useState(null);
+  const [heatmapData, setHeatmapData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const loadData = async () => {
+const loadData = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const [parcelsData, driversData, statsData] = await Promise.all([
+      const [parcelsData, driversData, statsData, heatmapDataResult] = await Promise.all([
         parcelService.getActiveDeliveries(),
         driverService.getAll(),
-        analyticsService.getWeeklyStats()
+        analyticsService.getWeeklyStats(),
+        analyticsService.getDeliveryHeatmap()
       ]);
 
       setParcels(parcelsData);
       setDrivers(driversData);
       setStats(statsData);
+      setHeatmapData(heatmapDataResult);
     } catch (err) {
       setError(err.message);
       toast.error("Failed to load dashboard data");
@@ -89,7 +92,7 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Map and Deliveries */}
+{/* Map and Deliveries */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="h-[500px]">
           <DeliveryMap
@@ -123,6 +126,15 @@ const Dashboard = () => {
           ))}
         </motion.div>
       </div>
+
+      {/* Delivery Heatmap */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <HeatmapCard data={heatmapData} />
+      </motion.div>
     </div>
   );
 };
