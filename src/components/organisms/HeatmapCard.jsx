@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Card from "@/components/atoms/Card";
 import ApperIcon from "@/components/ApperIcon";
+import Card from "@/components/atoms/Card";
 
 const HeatmapCard = ({ data = [] }) => {
   const [hoveredArea, setHoveredArea] = useState(null);
@@ -128,12 +128,12 @@ const HeatmapCard = ({ data = [] }) => {
                           <ApperIcon name="Package" size={12} />
                           <span>{area.deliveries} total deliveries</span>
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-secondary/70">
-                          <ApperIcon name="MapPin" size={12} />
-                          <span>
-                            {area.lat.toFixed(4)}, {area.lng.toFixed(4)}
-                          </span>
-                        </div>
+<div className="space-y-1">
+                            <div className="text-xs text-gray-500">Location</div>
+                            <div className="font-medium text-sm">
+                            {area.lat?.toFixed(4) ?? 'N/A'}, {area.lng?.toFixed(4) ?? 'N/A'}
+                            </div>
+                          </div>
                       </div>
                     </motion.div>
                   )}
