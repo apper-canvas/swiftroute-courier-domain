@@ -32,7 +32,7 @@ const BookPickup = () => {
     scheduledTime: ""
   });
 
-  const updateField = (field, value) => {
+const updateField = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
