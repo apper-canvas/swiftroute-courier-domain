@@ -1,0 +1,127 @@
+[
+  {
+    "Id": 1,
+    "name": "Michael Chen",
+    "phone": "+1 (555) 111-2222",
+    "email": "michael.chen@swiftroute.com",
+    "vehicleType": "Van",
+    "vehiclePlate": "SF-1234",
+    "capacity": 50,
+    "currentLocation": {
+      "lat": 37.7799,
+      "lng": -122.4094
+    },
+    "isAvailable": true,
+    "status": "active",
+    "rating": 4.8,
+    "activeDeliveries": [1, 3],
+    "totalDeliveries": 1247,
+    "onTimePercentage": 96.5,
+    "earnings": {
+      "today": 145.50,
+      "week": 892.00,
+      "month": 3456.00
+    },
+    "avatar": "https://ui-avatars.com/api/?name=Michael+Chen&background=2563eb&color=fff"
+  },
+  {
+    "Id": 2,
+    "name": "Emily Rodriguez",
+    "phone": "+1 (555) 222-3333",
+    "email": "emily.rodriguez@swiftroute.com",
+    "vehicleType": "Motorcycle",
+    "vehiclePlate": "SF-5678",
+    "capacity": 20,
+    "currentLocation": {
+      "lat": 37.7899,
+      "lng": -122.4044
+    },
+    "isAvailable": true,
+    "status": "active",
+    "rating": 4.9,
+    "activeDeliveries": [],
+    "totalDeliveries": 2103,
+    "onTimePercentage": 98.2,
+    "earnings": {
+      "today": 178.25,
+      "week": 1024.50,
+      "month": 4128.75
+    },
+    "avatar": "https://ui-avatars.com/api/?name=Emily+Rodriguez&background=10b981&color=fff"
+  },
+  {
+    "Id": 3,
+    "name": "James Anderson",
+    "phone": "+1 (555) 333-4444",
+    "email": "james.anderson@swiftroute.com",
+    "vehicleType": "Car",
+    "vehiclePlate": "SF-9012",
+    "capacity": 30,
+    "currentLocation": {
+      "lat": 37.7649,
+      "lng": -122.4294
+    },
+    "isAvailable": true,
+    "status": "active",
+    "rating": 4.7,
+    "activeDeliveries": [],
+    "totalDeliveries": 1856,
+    "onTimePercentage": 94.8,
+    "earnings": {
+      "today": 156.00,
+      "week": 945.25,
+      "month": 3789.50
+    },
+    "avatar": "https://ui-avatars.com/api/?name=James+Anderson&background=f59e0b&color=fff"
+  },
+  {
+    "Id": 4,
+    "name": "Sophia Martinez",
+    "phone": "+1 (555) 444-5555",
+    "email": "sophia.martinez@swiftroute.com",
+    "vehicleType": "Van",
+    "vehiclePlate": "SF-3456",
+    "capacity": 50,
+    "currentLocation": {
+      "lat": 37.7549,
+      "lng": -122.4194
+    },
+    "isAvailable": false,
+    "status": "on-break",
+    "rating": 4.6,
+    "activeDeliveries": [],
+    "totalDeliveries": 1534,
+    "onTimePercentage": 93.5,
+    "earnings": {
+      "today": 98.75,
+      "week": 756.00,
+      "month": 3124.25
+    },
+    "avatar": "https://ui-avatars.com/api/?name=Sophia+Martinez&background=8b5cf6&color=fff"
+  },
+  {
+    "Id": 5,
+    "name": "Daniel Kim",
+    "phone": "+1 (555) 555-6666",
+    "email": "daniel.kim@swiftroute.com",
+    "vehicleType": "Motorcycle",
+    "vehiclePlate": "SF-7890",
+    "capacity": 20,
+    "currentLocation": {
+      "lat": 37.7849,
+      "lng": -122.4144
+    },
+    "isAvailable": true,
+    "status": "active",
+    "rating": 4.9,
+    "activeDeliveries": [],
+    "totalDeliveries": 1978,
+    "onTimePercentage": 97.8,
+    "earnings": {
+      "today": 189.50,
+      "week": 1134.75,
+      "month": 4567.25
+    },
+    "avatar": "https://ui-avatars.com/api/?name=Daniel+Kim&background=ec4899&color=fff"
+  }
+]

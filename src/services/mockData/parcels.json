@@ -1,0 +1,187 @@
+[
+  {
+    "Id": 1,
+    "trackingNumber": "SWR2024001234",
+    "customerId": "1",
+    "customerName": "Sarah Johnson",
+    "customerPhone": "+1 (555) 123-4567",
+    "pickupAddress": {
+      "street": "1234 Elm Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94102",
+      "coordinates": { "lat": 37.7749, "lng": -122.4194 }
+    },
+    "deliveryAddress": {
+      "street": "5678 Oak Avenue",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94105",
+      "coordinates": { "lat": 37.7849, "lng": -122.4094 }
+    },
+    "packageDetails": {
+      "weight": 5.5,
+      "dimensions": { "length": 12, "width": 8, "height": 6 },
+      "fragile": true,
+      "description": "Electronics - Handle with Care"
+    },
+    "scheduledTime": "2024-01-15T14:00:00",
+    "status": "in-transit",
+    "driverId": "1",
+    "driverName": "Michael Chen",
+    "createdAt": "2024-01-15T10:30:00",
+    "estimatedDeliveryTime": "2024-01-15T15:30:00",
+    "actualDeliveryTime": null,
+    "price": 24.99,
+    "paymentStatus": "pending",
+    "distance": 8.5
+  },
+  {
+    "Id": 2,
+    "trackingNumber": "SWR2024001235",
+    "customerId": "2",
+    "customerName": "David Martinez",
+    "customerPhone": "+1 (555) 234-5678",
+    "pickupAddress": {
+      "street": "789 Pine Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94103",
+      "coordinates": { "lat": 37.7699, "lng": -122.4144 }
+    },
+    "deliveryAddress": {
+      "street": "321 Market Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94104",
+      "coordinates": { "lat": 37.7899, "lng": -122.4044 }
+    },
+    "packageDetails": {
+      "weight": 2.3,
+      "dimensions": { "length": 10, "width": 10, "height": 4 },
+      "fragile": false,
+      "description": "Documents"
+    },
+    "scheduledTime": "2024-01-15T11:00:00",
+    "status": "delivered",
+    "driverId": "2",
+    "driverName": "Emily Rodriguez",
+    "createdAt": "2024-01-15T09:00:00",
+    "estimatedDeliveryTime": "2024-01-15T12:00:00",
+    "actualDeliveryTime": "2024-01-15T11:45:00",
+    "price": 15.99,
+    "paymentStatus": "completed",
+    "distance": 4.2
+  },
+  {
+    "Id": 3,
+    "trackingNumber": "SWR2024001236",
+    "customerId": "3",
+    "customerName": "Jennifer Lee",
+    "customerPhone": "+1 (555) 345-6789",
+    "pickupAddress": {
+      "street": "456 Mission Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94110",
+      "coordinates": { "lat": 37.7599, "lng": -122.4244 }
+    },
+    "deliveryAddress": {
+      "street": "987 Howard Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94103",
+      "coordinates": { "lat": 37.7749, "lng": -122.4094 }
+    },
+    "packageDetails": {
+      "weight": 8.7,
+      "dimensions": { "length": 18, "width": 12, "height": 8 },
+      "fragile": true,
+      "description": "Glass Items"
+    },
+    "scheduledTime": "2024-01-15T16:00:00",
+    "status": "assigned",
+    "driverId": "1",
+    "driverName": "Michael Chen",
+    "createdAt": "2024-01-15T11:30:00",
+    "estimatedDeliveryTime": "2024-01-15T17:30:00",
+    "actualDeliveryTime": null,
+    "price": 32.99,
+    "paymentStatus": "pending",
+    "distance": 5.8
+  },
+  {
+    "Id": 4,
+    "trackingNumber": "SWR2024001237",
+    "customerId": "4",
+    "customerName": "Robert Taylor",
+    "customerPhone": "+1 (555) 456-7890",
+    "pickupAddress": {
+      "street": "123 Folsom Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94107",
+      "coordinates": { "lat": 37.7799, "lng": -122.3994 }
+    },
+    "deliveryAddress": {
+      "street": "654 Valencia Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94110",
+      "coordinates": { "lat": 37.7599, "lng": -122.4194 }
+    },
+    "packageDetails": {
+      "weight": 15.2,
+      "dimensions": { "length": 24, "width": 18, "height": 12 },
+      "fragile": false,
+      "description": "Office Supplies"
+    },
+    "scheduledTime": "2024-01-15T13:00:00",
+    "status": "pending",
+    "driverId": null,
+    "driverName": null,
+    "createdAt": "2024-01-15T12:15:00",
+    "estimatedDeliveryTime": "2024-01-15T15:00:00",
+    "actualDeliveryTime": null,
+    "price": 28.99,
+    "paymentStatus": "pending",
+    "distance": 3.5
+  },
+  {
+    "Id": 5,
+    "trackingNumber": "SWR2024001238",
+    "customerId": "5",
+    "customerName": "Amanda Wilson",
+    "customerPhone": "+1 (555) 567-8901",
+    "pickupAddress": {
+      "street": "789 Bryant Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94103",
+      "coordinates": { "lat": 37.7699, "lng": -122.4094 }
+    },
+    "deliveryAddress": {
+      "street": "321 Divisadero Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94117",
+      "coordinates": { "lat": 37.7749, "lng": -122.4394 }
+    },
+    "packageDetails": {
+      "weight": 3.8,
+      "dimensions": { "length": 14, "width": 10, "height": 5 },
+      "fragile": false,
+      "description": "Clothing"
+    },
+    "scheduledTime": "2024-01-15T10:00:00",
+    "status": "delivered",
+    "driverId": "3",
+    "driverName": "James Anderson",
+    "createdAt": "2024-01-15T08:30:00",
+    "estimatedDeliveryTime": "2024-01-15T11:00:00",
+    "actualDeliveryTime": "2024-01-15T10:50:00",
+    "price": 18.99,
+    "paymentStatus": "completed",
+    "distance": 6.2
+  }
+]

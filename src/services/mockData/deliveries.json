@@ -1,0 +1,88 @@
+[
+  {
+    "Id": 1,
+    "parcelId": "1",
+    "trackingNumber": "SWR2024001234",
+    "driverId": "1",
+    "pickupTime": "2024-01-15T13:15:00",
+    "deliveryTime": null,
+    "distance": 8.5,
+    "routeTaken": [
+      { "lat": 37.7749, "lng": -122.4194, "timestamp": "2024-01-15T13:15:00" },
+      { "lat": 37.7779, "lng": -122.4164, "timestamp": "2024-01-15T13:25:00" },
+      { "lat": 37.7809, "lng": -122.4134, "timestamp": "2024-01-15T13:35:00" }
+    ],
+    "proofOfDelivery": null,
+    "signature": null,
+    "photos": [],
+    "customerRating": null,
+    "notes": "Customer requested contactless delivery",
+    "status": "in-transit"
+  },
+  {
+    "Id": 2,
+    "parcelId": "2",
+    "trackingNumber": "SWR2024001235",
+    "driverId": "2",
+    "pickupTime": "2024-01-15T10:30:00",
+    "deliveryTime": "2024-01-15T11:45:00",
+    "distance": 4.2,
+    "routeTaken": [
+      { "lat": 37.7699, "lng": -122.4144, "timestamp": "2024-01-15T10:30:00" },
+      { "lat": 37.7749, "lng": -122.4094, "timestamp": "2024-01-15T10:50:00" },
+      { "lat": 37.7899, "lng": -122.4044, "timestamp": "2024-01-15T11:45:00" }
+    ],
+    "proofOfDelivery": {
+      "signatureUrl": "data:image/png;base64,signature123",
+      "photoUrls": ["https://example.com/delivery-photo-1.jpg"],
+      "completedBy": "Emily Rodriguez",
+      "completedAt": "2024-01-15T11:45:00"
+    },
+    "signature": "data:image/png;base64,signature123",
+    "photos": ["https://example.com/delivery-photo-1.jpg"],
+    "customerRating": 5,
+    "notes": "Package delivered to front door",
+    "status": "delivered"
+  },
+  {
+    "Id": 3,
+    "parcelId": "3",
+    "trackingNumber": "SWR2024001236",
+    "driverId": "1",
+    "pickupTime": null,
+    "deliveryTime": null,
+    "distance": 5.8,
+    "routeTaken": [],
+    "proofOfDelivery": null,
+    "signature": null,
+    "photos": [],
+    "customerRating": null,
+    "notes": "Handle with extreme care - glass items",
+    "status": "assigned"
+  },
+  {
+    "Id": 4,
+    "parcelId": "5",
+    "trackingNumber": "SWR2024001238",
+    "driverId": "3",
+    "pickupTime": "2024-01-15T09:00:00",
+    "deliveryTime": "2024-01-15T10:50:00",
+    "distance": 6.2,
+    "routeTaken": [
+      { "lat": 37.7699, "lng": -122.4094, "timestamp": "2024-01-15T09:00:00" },
+      { "lat": 37.7724, "lng": -122.4194, "timestamp": "2024-01-15T09:30:00" },
+      { "lat": 37.7749, "lng": -122.4394, "timestamp": "2024-01-15T10:50:00" }
+    ],
+    "proofOfDelivery": {
+      "signatureUrl": "data:image/png;base64,signature456",
+      "photoUrls": ["https://example.com/delivery-photo-2.jpg"],
+      "completedBy": "James Anderson",
+      "completedAt": "2024-01-15T10:50:00"
+    },
+    "signature": "data:image/png;base64,signature456",
+    "photos": ["https://example.com/delivery-photo-2.jpg"],
+    "customerRating": 4,
+    "notes": "Left with neighbor",
+    "status": "delivered"
+  }
+]

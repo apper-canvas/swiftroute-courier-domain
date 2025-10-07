@@ -1,0 +1,48 @@
+{
+  "dailyVolumes": [
+    { "date": "2024-01-08", "deliveries": 45, "revenue": 1247.50 },
+    { "date": "2024-01-09", "deliveries": 52, "revenue": 1456.75 },
+    { "date": "2024-01-10", "deliveries": 48, "revenue": 1334.25 },
+    { "date": "2024-01-11", "deliveries": 61, "revenue": 1678.00 },
+    { "date": "2024-01-12", "deliveries": 55, "revenue": 1523.50 },
+    { "date": "2024-01-13", "deliveries": 38, "revenue": 1056.00 },
+    { "date": "2024-01-14", "deliveries": 42, "revenue": 1167.50 },
+    { "date": "2024-01-15", "deliveries": 28, "revenue": 789.25 }
+  ],
+  "weeklyStats": {
+    "totalDeliveries": 369,
+    "completedDeliveries": 352,
+    "onTimeDeliveries": 337,
+    "delayedDeliveries": 15,
+    "failedDeliveries": 2,
+    "averageDeliveryTime": 42.5,
+    "totalRevenue": 10252.75,
+    "averageRevenue": 27.80
+  },
+  "driverPerformance": [
+    { "driverId": "2", "name": "Emily Rodriguez", "deliveries": 89, "onTime": 98.2, "rating": 4.9, "revenue": 2456.75 },
+    { "driverId": "5", "name": "Daniel Kim", "deliveries": 84, "onTime": 97.8, "rating": 4.9, "revenue": 2334.50 },
+    { "driverId": "1", "name": "Michael Chen", "deliveries": 78, "onTime": 96.5, "rating": 4.8, "revenue": 2178.25 },
+    { "driverId": "3", "name": "James Anderson", "deliveries": 72, "onTime": 94.8, "rating": 4.7, "revenue": 2012.00 },
+    { "driverId": "4", "name": "Sophia Martinez", "deliveries": 46, "onTime": 93.5, "rating": 4.6, "revenue": 1271.25 }
+  ],
+  "delayAnalysis": [
+    { "reason": "Traffic congestion", "count": 8, "percentage": 53.3 },
+    { "reason": "Weather conditions", "count": 3, "percentage": 20.0 },
+    { "reason": "Customer not available", "count": 2, "percentage": 13.3 },
+    { "reason": "Vehicle breakdown", "count": 1, "percentage": 6.7 },
+    { "reason": "Address not found", "count": 1, "percentage": 6.7 }
+  ],
+  "hourlyDistribution": [
+    { "hour": 8, "deliveries": 12 },
+    { "hour": 9, "deliveries": 24 },
+    { "hour": 10, "deliveries": 35 },
+    { "hour": 11, "deliveries": 42 },
+    { "hour": 12, "deliveries": 38 },
+    { "hour": 13, "deliveries": 45 },
+    { "hour": 14, "deliveries": 48 },
+    { "hour": 15, "deliveries": 52 },
+    { "hour": 16, "deliveries": 41 },
+    { "hour": 17, "deliveries": 32 }
+  ]
+}
