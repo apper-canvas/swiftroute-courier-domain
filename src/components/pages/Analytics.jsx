@@ -104,20 +104,23 @@ const volumeChartOptions = {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
+          key="total-deliveries"
           title="Total Deliveries"
           value={stats.totalDeliveries}
           icon="Package"
           gradient="from-primary to-primary/80"
         />
         <StatCard
+          key="completed-deliveries"
           title="Completed"
           value={stats.completedDeliveries}
           icon="CheckCircle2"
           gradient="from-success to-success/80"
         />
         <StatCard
+          key="on-time-rate"
           title="On-Time Rate"
           value={`${onTimePercentage}%`}
           icon="Clock"
@@ -126,6 +129,7 @@ const volumeChartOptions = {
           gradient="from-info to-info/80"
         />
         <StatCard
+          key="total-revenue"
           title="Total Revenue"
           value={`$${stats.totalRevenue.toLocaleString()}`}
           icon="DollarSign"
