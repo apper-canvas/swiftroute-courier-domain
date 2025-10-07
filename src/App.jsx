@@ -9,6 +9,7 @@ import DeliveryConfirmation from "@/components/pages/DeliveryConfirmation";
 import DriverDashboard from "@/components/pages/DriverDashboard";
 import Analytics from "@/components/pages/Analytics";
 import DriverManagement from "@/components/pages/DriverManagement";
+import DeliveryHistory from "@/components/pages/DeliveryHistory";
 
 function App() {
   return (
@@ -25,10 +26,11 @@ function App() {
         pauseOnHover
       />
       <Routes>
-        <Route path="/" element={<Layout />}>
+<Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="book-pickup" element={<BookPickup />} />
           <Route path="active-deliveries" element={<ActiveDeliveries />} />
+          <Route path="delivery-history" element={<DeliveryHistory />} />
           <Route path="track/:parcelId" element={<TrackParcel />} />
           <Route path="delivery-confirmation/:deliveryId" element={<DeliveryConfirmation />} />
           <Route path="driver-dashboard" element={<DriverDashboard />} />

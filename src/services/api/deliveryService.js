@@ -92,8 +92,13 @@ const deliveryService = {
     await delay(200);
     const index = deliveries.findIndex(d => d.Id === parseInt(id));
     if (index === -1) throw new Error("Delivery not found");
-    deliveries.splice(index, 1);
+deliveries.splice(index, 1);
     return { success: true };
+  },
+
+  async getCompletedDeliveries() {
+    await delay(300);
+    return deliveries.filter(d => d.status === 'delivered' || d.status === 'cancelled');
   }
 };
 

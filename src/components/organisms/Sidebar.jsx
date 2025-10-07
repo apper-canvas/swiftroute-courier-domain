@@ -4,10 +4,11 @@ import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const menuItems = [
+const menuItems = [
     { path: "/", icon: "LayoutDashboard", label: "Dashboard" },
     { path: "/book-pickup", icon: "PackagePlus", label: "Book Pickup" },
     { path: "/active-deliveries", icon: "Truck", label: "Active Deliveries" },
+    { path: "/delivery-history", icon: "Package", label: "Delivery History" },
     { path: "/track/SWR2024001234", icon: "MapPin", label: "Track Parcel" },
     { path: "/driver-dashboard", icon: "User", label: "Driver Dashboard" },
     { path: "/driver-management", icon: "Users", label: "Driver Management" },
