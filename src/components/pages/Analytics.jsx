@@ -218,10 +218,10 @@ const volumeChartOptions = {
 <td className="py-3 px-4 text-right">
                       <span className="font-semibold text-secondary">{driver.rating}</span>
                     </td>
-                    <td className="py-3 px-4 text-right text-secondary">
+<td className="py-3 px-4 text-right text-secondary">
                       ${(driver.revenue ?? 0).toLocaleString()}
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </tbody>
             </table>
