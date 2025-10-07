@@ -23,7 +23,7 @@ const TrackParcel = () => {
   const loadData = async () => {
     try {
       setLoading(true);
-      setError(null);
+setError(null);
 
       const parcelData = await parcelService.getByTrackingNumber(parcelId);
       setParcel(parcelData);
@@ -32,11 +32,12 @@ const TrackParcel = () => {
         const deliveryData = await deliveryService.getByParcelId(parcelData.Id);
         setDelivery(deliveryData);
       } catch (err) {
+        // Missing delivery is a valid state - parcel exists but not assigned to delivery yet
         setDelivery(null);
       }
     } catch (err) {
-      setError(err.message);
-      toast.error("Failed to load parcel information");
+      setError(`Failed to load parcel: ${err.message}`);
+      toast.error(`Failed to load parcel information: ${err.message}`);
     } finally {
       setLoading(false);
     }
