@@ -90,7 +90,7 @@ const volumeChartOptions = {
 
   const hourlyChartSeries = [{ name: "Deliveries", data: hourly.map(h => h.deliveries) }];
 
-  const onTimePercentage = stats.completedDeliveries 
+const onTimePercentage = (stats?.completedDeliveries && stats?.onTimeDeliveries)
     ? ((stats.onTimeDeliveries / stats.completedDeliveries) * 100).toFixed(1)
     : 0;
 
@@ -108,14 +108,14 @@ const volumeChartOptions = {
         <StatCard
           key="total-deliveries"
           title="Total Deliveries"
-          value={stats.totalDeliveries}
+          value={stats?.totalDeliveries ?? 0}
           icon="Package"
           gradient="from-primary to-primary/80"
         />
         <StatCard
           key="completed-deliveries"
           title="Completed"
-          value={stats.completedDeliveries}
+          value={stats?.completedDeliveries ?? 0}
           icon="CheckCircle2"
           gradient="from-success to-success/80"
         />
@@ -131,7 +131,7 @@ const volumeChartOptions = {
         <StatCard
           key="total-revenue"
           title="Total Revenue"
-          value={`$${stats.totalRevenue.toLocaleString()}`}
+          value={`$${(stats?.totalRevenue ?? 0).toLocaleString()}`}
           icon="DollarSign"
           trend="up"
           trendValue="+8%"
