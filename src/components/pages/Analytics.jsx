@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import ReactApexChart from "react-apexcharts";
-import analyticsService from "@/services/api/analyticsService";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Card from "@/components/atoms/Card";
 import StatCard from "@/components/molecules/StatCard";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import Dashboard from "@/components/pages/Dashboard";
+import Card from "@/components/atoms/Card";
+import analyticsService from "@/services/api/analyticsService";
 
 const Analytics = () => {
   const [stats, setStats] = useState(null);
@@ -50,21 +51,21 @@ const Analytics = () => {
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadData} />;
 
-  const volumeChartOptions = {
+const volumeChartOptions = {
     chart: { type: "area", toolbar: { show: false }, fontFamily: "Inter" },
     colors: ["#2563eb", "#f59e0b"],
     dataLabels: { enabled: false },
     stroke: { curve: "smooth", width: 2 },
-    fill: { type: "gradient", gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.1 } },
-    xaxis: { categories: volumes.map(v => v.date.slice(5)), labels: { style: { colors: "#475569" } } },
+    fill: { type: "gradient", gradient: { opacityFrom: 0.6, opacityTo: 0.1 } },
+    xaxis: { categories: volumes.map(v => v.date?.slice(5) || 'N/A'), labels: { style: { colors: "#475569" } } },
     yaxis: { labels: { style: { colors: "#475569" } } },
-    legend: { position: "top" },
-    tooltip: { theme: "light" }
+    tooltip: { theme: "light" },
+    legend: { position: "top" }
   };
 
   const volumeChartSeries = [
-    { name: "Deliveries", data: volumes.map(v => v.deliveries) },
-    { name: "Revenue", data: volumes.map(v => Math.round(v.revenue / 10)) }
+    { name: "Deliveries", data: volumes.map(v => v.deliveries || 0) },
+    { name: "Revenue", data: volumes.map(v => Math.round((v.revenue || 0) / 10)) }
   ];
 
   const delayChartOptions = {
