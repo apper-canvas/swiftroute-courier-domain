@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import driverService from "@/services/api/driverService";
@@ -10,6 +11,7 @@ import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 
 const DriverManagement = () => {
+const navigate = useNavigate();
   const [drivers, setDrivers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -147,7 +149,12 @@ const DriverManagement = () => {
                   <ApperIcon name="Phone" size={14} />
                   Call
                 </Button>
-                <Button variant="primary" size="sm" className="flex-1">
+<Button 
+                  variant="primary" 
+                  size="sm" 
+                  className="flex-1"
+                  onClick={() => navigate(`/driver-management/${driver.Id}`)}
+                >
                   <ApperIcon name="Eye" size={14} />
                   Details
                 </Button>

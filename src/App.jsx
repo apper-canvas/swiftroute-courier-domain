@@ -13,6 +13,7 @@ import DeliveryConfirmation from "@/components/pages/DeliveryConfirmation";
 import DriverDashboard from "@/components/pages/DriverDashboard";
 import Analytics from "@/components/pages/Analytics";
 import DriverManagement from "@/components/pages/DriverManagement";
+import DriverDetail from "@/components/pages/DriverDetail";
 import DeliveryHistory from "@/components/pages/DeliveryHistory";
 import Login from "@/components/pages/Login";
 import Signup from "@/components/pages/Signup";
@@ -151,7 +152,8 @@ return (
           <Route path="delivery-confirmation/:deliveryId" element={<DeliveryConfirmation />} />
           <Route path="driver-dashboard" element={<DriverDashboard />} />
           <Route path="analytics" element={<Analytics />} />
-          <Route path="driver-management" element={<DriverManagement />} />
+<Route path="driver-management" element={<DriverManagement />} />
+          <Route path="driver-management/:driverId" element={<DriverDetail />} />
         </Route>
       </Routes>
     </AuthContext.Provider>
