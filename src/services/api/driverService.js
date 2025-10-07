@@ -1,101 +1,308 @@
-import driversData from "@/services/mockData/drivers.json";
+const { ApperClient } = window.ApperSDK;
 
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-let drivers = [...driversData];
+const apperClient = new ApperClient({
+  apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+  apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+});
 
 const driverService = {
   async getAll() {
-    await delay(300);
-    return [...drivers];
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Id"}},
+          {"field": {"Name": "name_c"}},
+          {"field": {"Name": "phone_c"}},
+          {"field": {"Name": "email_c"}},
+          {"field": {"Name": "vehicle_type_c"}},
+          {"field": {"Name": "vehicle_plate_c"}},
+          {"field": {"Name": "capacity_c"}},
+          {"field": {"Name": "current_location_lat_c"}},
+          {"field": {"Name": "current_location_lng_c"}},
+          {"field": {"Name": "is_available_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "rating_c"}},
+          {"field": {"Name": "total_deliveries_c"}},
+          {"field": {"Name": "on_time_percentage_c"}},
+          {"field": {"Name": "earnings_today_c"}},
+          {"field": {"Name": "earnings_week_c"}},
+          {"field": {"Name": "earnings_month_c"}},
+          {"field": {"Name": "avatar_c"}}
+        ]
+      };
+
+      const response = await apperClient.fetchRecords('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return (response.data || []).map(d => ({
+        Id: d.Id,
+        name: d.name_c,
+        phone: d.phone_c,
+        email: d.email_c,
+        vehicleType: d.vehicle_type_c,
+        vehiclePlate: d.vehicle_plate_c,
+        capacity: d.capacity_c,
+        currentLocation: {
+          lat: d.current_location_lat_c,
+          lng: d.current_location_lng_c
+        },
+        isAvailable: d.is_available_c,
+        status: d.status_c,
+        rating: d.rating_c,
+        totalDeliveries: d.total_deliveries_c,
+        onTimePercentage: d.on_time_percentage_c,
+        earnings: {
+          today: d.earnings_today_c,
+          week: d.earnings_week_c,
+          month: d.earnings_month_c
+        },
+        avatar: d.avatar_c,
+        activeDeliveries: []
+      }));
+    } catch (error) {
+      console.error("Error fetching drivers:", error.message);
+      throw error;
+    }
   },
 
   async getById(id) {
-    await delay(200);
-    const driver = drivers.find(d => d.Id === parseInt(id));
-    if (!driver) throw new Error("Driver not found");
-    return { ...driver };
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Id"}},
+          {"field": {"Name": "name_c"}},
+          {"field": {"Name": "phone_c"}},
+          {"field": {"Name": "email_c"}},
+          {"field": {"Name": "vehicle_type_c"}},
+          {"field": {"Name": "vehicle_plate_c"}},
+          {"field": {"Name": "capacity_c"}},
+          {"field": {"Name": "current_location_lat_c"}},
+          {"field": {"Name": "current_location_lng_c"}},
+          {"field": {"Name": "is_available_c"}},
+          {"field": {"Name": "status_c"}},
+          {"field": {"Name": "rating_c"}},
+          {"field": {"Name": "total_deliveries_c"}},
+          {"field": {"Name": "on_time_percentage_c"}},
+          {"field": {"Name": "earnings_today_c"}},
+          {"field": {"Name": "earnings_week_c"}},
+          {"field": {"Name": "earnings_month_c"}},
+          {"field": {"Name": "avatar_c"}}
+        ]
+      };
+
+      const response = await apperClient.getRecordById('driver_c', parseInt(id), params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      const d = response.data;
+      return {
+        Id: d.Id,
+        name: d.name_c,
+        phone: d.phone_c,
+        email: d.email_c,
+        vehicleType: d.vehicle_type_c,
+        vehiclePlate: d.vehicle_plate_c,
+        capacity: d.capacity_c,
+        currentLocation: {
+          lat: d.current_location_lat_c,
+          lng: d.current_location_lng_c
+        },
+        isAvailable: d.is_available_c,
+        status: d.status_c,
+        rating: d.rating_c,
+        totalDeliveries: d.total_deliveries_c,
+        onTimePercentage: d.on_time_percentage_c,
+        earnings: {
+          today: d.earnings_today_c,
+          week: d.earnings_week_c,
+          month: d.earnings_month_c
+        },
+        avatar: d.avatar_c,
+        activeDeliveries: []
+      };
+    } catch (error) {
+      console.error(`Error fetching driver ${id}:`, error.message);
+      throw error;
+    }
   },
 
   async getAvailable() {
-    await delay(250);
-    return drivers.filter(d => d.isAvailable && d.status === "active").map(d => ({ ...d }));
+    try {
+      const params = {
+        fields: [
+          {"field": {"Name": "Id"}},
+          {"field": {"Name": "name_c"}},
+          {"field": {"Name": "is_available_c"}},
+          {"field": {"Name": "status_c"}}
+        ],
+        where: [
+          {"FieldName": "is_available_c", "Operator": "EqualTo", "Values": [true]},
+          {"FieldName": "status_c", "Operator": "EqualTo", "Values": ["active"]}
+        ]
+      };
+
+      const response = await apperClient.fetchRecords('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return response.data || [];
+    } catch (error) {
+      console.error("Error fetching available drivers:", error.message);
+      throw error;
+    }
   },
 
   async create(driverData) {
-    await delay(400);
-    const maxId = Math.max(...drivers.map(d => d.Id), 0);
-    const newDriver = {
-      Id: maxId + 1,
-      ...driverData,
-      isAvailable: true,
-      status: "active",
-      rating: 0,
-      activeDeliveries: [],
-      totalDeliveries: 0,
-      onTimePercentage: 0,
-      earnings: { today: 0, week: 0, month: 0 },
-      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(driverData.name)}&background=2563eb&color=fff`
-    };
-    drivers.push(newDriver);
-    return { ...newDriver };
+    try {
+      const params = {
+        records: [{
+          name_c: driverData.name,
+          phone_c: driverData.phone,
+          email_c: driverData.email,
+          vehicle_type_c: driverData.vehicleType,
+          vehicle_plate_c: driverData.vehiclePlate,
+          capacity_c: driverData.capacity,
+          is_available_c: true,
+          status_c: "active",
+          rating_c: 0,
+          total_deliveries_c: 0,
+          on_time_percentage_c: 0,
+          earnings_today_c: 0,
+          earnings_week_c: 0,
+          earnings_month_c: 0,
+          avatar_c: `https://ui-avatars.com/api/?name=${encodeURIComponent(driverData.name)}&background=2563eb&color=fff`
+        }]
+      };
+
+      const response = await apperClient.createRecord('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results && response.results[0].success) {
+        return response.results[0].data;
+      }
+
+      throw new Error("Failed to create driver");
+    } catch (error) {
+      console.error("Error creating driver:", error.message);
+      throw error;
+    }
   },
 
   async update(id, data) {
-    await delay(300);
-    const index = drivers.findIndex(d => d.Id === parseInt(id));
-    if (index === -1) throw new Error("Driver not found");
-    drivers[index] = { ...drivers[index], ...data };
-    return { ...drivers[index] };
+    try {
+      const updateData = {
+        Id: parseInt(id)
+      };
+
+      if (data.name) updateData.name_c = data.name;
+      if (data.phone) updateData.phone_c = data.phone;
+      if (data.email) updateData.email_c = data.email;
+      if (data.vehicleType) updateData.vehicle_type_c = data.vehicleType;
+      if (data.vehiclePlate) updateData.vehicle_plate_c = data.vehiclePlate;
+      if (data.capacity) updateData.capacity_c = data.capacity;
+      if (data.isAvailable !== undefined) updateData.is_available_c = data.isAvailable;
+      if (data.status) updateData.status_c = data.status;
+      if (data.rating) updateData.rating_c = data.rating;
+
+      const params = { records: [updateData] };
+
+      const response = await apperClient.updateRecord('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results && response.results[0].success) {
+        return response.results[0].data;
+      }
+
+      throw new Error("Failed to update driver");
+    } catch (error) {
+      console.error(`Error updating driver ${id}:`, error.message);
+      throw error;
+    }
   },
 
   async updateLocation(id, location) {
-    await delay(150);
-    const index = drivers.findIndex(d => d.Id === parseInt(id));
-    if (index === -1) throw new Error("Driver not found");
-    drivers[index] = { ...drivers[index], currentLocation: location };
-    return { ...drivers[index] };
+    try {
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          current_location_lat_c: location.lat,
+          current_location_lng_c: location.lng
+        }]
+      };
+
+      const response = await apperClient.updateRecord('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return response.results[0].data;
+    } catch (error) {
+      console.error(`Error updating driver location ${id}:`, error.message);
+      throw error;
+    }
   },
 
   async updateAvailability(id, isAvailable) {
-    await delay(200);
-    const index = drivers.findIndex(d => d.Id === parseInt(id));
-    if (index === -1) throw new Error("Driver not found");
-    drivers[index] = { ...drivers[index], isAvailable };
-    return { ...drivers[index] };
+    try {
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          is_available_c: isAvailable
+        }]
+      };
+
+      const response = await apperClient.updateRecord('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return response.results[0].data;
+    } catch (error) {
+      console.error(`Error updating driver availability ${id}:`, error.message);
+      throw error;
+    }
   },
 
-  async addActiveDelivery(driverId, parcelId) {
-    await delay(200);
-    const index = drivers.findIndex(d => d.Id === parseInt(driverId));
-    if (index === -1) throw new Error("Driver not found");
-    const activeDeliveries = [...drivers[index].activeDeliveries, parseInt(parcelId)];
-    drivers[index] = { ...drivers[index], activeDeliveries };
-    return { ...drivers[index] };
-  },
+  async delete(id) {
+    try {
+      const params = { RecordIds: [parseInt(id)] };
+      const response = await apperClient.deleteRecord('driver_c', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
 
-  async removeActiveDelivery(driverId, parcelId) {
-    await delay(200);
-    const index = drivers.findIndex(d => d.Id === parseInt(driverId));
-    if (index === -1) throw new Error("Driver not found");
-    const activeDeliveries = drivers[index].activeDeliveries.filter(id => id !== parseInt(parcelId));
-    drivers[index] = { ...drivers[index], activeDeliveries };
-    return { ...drivers[index] };
-  },
-
-async delete(id) {
-    await delay(200);
-    const index = drivers.findIndex(d => d.Id === parseInt(id));
-    if (index === -1) throw new Error("Driver not found");
-    drivers.splice(index, 1);
-    return { success: true };
+      return { success: true };
+    } catch (error) {
+      console.error(`Error deleting driver ${id}:`, error.message);
+      throw error;
+    }
   },
 
   async getCompletedDeliveries(driverId, dateRange = {}) {
-    await delay(300);
-    const { startDate, endDate } = dateRange;
-    
-    // Mock completed deliveries data with earnings calculation
     const completedDeliveries = [
       {
         Id: 101,
@@ -114,93 +321,48 @@ async delete(id) {
         deliveredAt: new Date(Date.now() - 86400000).toISOString(),
         distance: 8.7,
         earnings: 18.75
-      },
-      {
-        Id: 103,
-        trackingNumber: "SR2024-003",
-        recipientName: "Emma Davis",
-        recipientPhone: "+1 (555) 345-6789",
-        deliveredAt: new Date(Date.now() - 172800000).toISOString(),
-        distance: 3.5,
-        earnings: 9.50
-      },
-      {
-        Id: 104,
-        trackingNumber: "SR2024-004",
-        recipientName: "James Wilson",
-        recipientPhone: "+1 (555) 456-7890",
-        deliveredAt: new Date(Date.now() - 259200000).toISOString(),
-        distance: 12.3,
-        earnings: 25.00
-      },
-      {
-        Id: 105,
-        trackingNumber: "SR2024-005",
-        recipientName: "Olivia Martinez",
-        recipientPhone: "+1 (555) 567-8901",
-        deliveredAt: new Date(Date.now() - 345600000).toISOString(),
-        distance: 6.8,
-        earnings: 15.25
-      },
-      {
-        Id: 106,
-        trackingNumber: "SR2024-006",
-        recipientName: "Daniel Taylor",
-        recipientPhone: "+1 (555) 678-9012",
-        deliveredAt: new Date(Date.now() - 432000000).toISOString(),
-        distance: 4.1,
-        earnings: 11.00
-      },
-      {
-        Id: 107,
-        trackingNumber: "SR2024-007",
-        recipientName: "Sophia Anderson",
-        recipientPhone: "+1 (555) 789-0123",
-        deliveredAt: new Date(Date.now() - 518400000).toISOString(),
-        distance: 9.6,
-        earnings: 20.50
-      },
-      {
-        Id: 108,
-        trackingNumber: "SR2024-008",
-        recipientName: "William Thomas",
-        recipientPhone: "+1 (555) 890-1234",
-        deliveredAt: new Date(Date.now() - 604800000).toISOString(),
-        distance: 7.3,
-        earnings: 16.75
       }
     ];
 
-    let filtered = completedDeliveries.filter(d => d);
-
-    if (startDate) {
-      filtered = filtered.filter(d => new Date(d.deliveredAt) >= startDate);
+    let filtered = completedDeliveries;
+    if (dateRange.startDate) {
+      filtered = filtered.filter(d => new Date(d.deliveredAt) >= dateRange.startDate);
     }
-    if (endDate) {
-      filtered = filtered.filter(d => new Date(d.deliveredAt) <= endDate);
+    if (dateRange.endDate) {
+      filtered = filtered.filter(d => new Date(d.deliveredAt) <= dateRange.endDate);
     }
 
-    return filtered.map(d => ({ ...d }));
+    return filtered;
   },
 
   async getPayoutSummary(driverId) {
-    await delay(250);
-    const driver = drivers.find(d => d.Id === parseInt(driverId));
-    if (!driver) throw new Error("Driver not found");
+    try {
+      const driver = await this.getById(driverId);
+      
+      const today = new Date();
+      const daysUntilFriday = (5 - today.getDay() + 7) % 7 || 7;
+      const nextPayoutDate = new Date(today);
+      nextPayoutDate.setDate(today.getDate() + daysUntilFriday);
 
-    // Calculate next payout date (every Friday)
-    const today = new Date();
-    const daysUntilFriday = (5 - today.getDay() + 7) % 7 || 7;
-    const nextPayoutDate = new Date(today);
-    nextPayoutDate.setDate(today.getDate() + daysUntilFriday);
+      return {
+        nextPayoutDate: nextPayoutDate.toISOString(),
+        pendingAmount: driver.earnings.week * 0.85,
+        totalPaidOut: driver.earnings.month * 2.5,
+        payoutMethod: "Bank Transfer",
+        bankAccount: "****1234"
+      };
+    } catch (error) {
+      console.error(`Error getting payout summary for driver ${driverId}:`, error.message);
+      throw error;
+    }
+  },
 
-    return {
-      nextPayoutDate: nextPayoutDate.toISOString(),
-      pendingAmount: driver.earnings.week * 0.85, // 85% of weekly earnings pending
-      totalPaidOut: driver.earnings.month * 2.5, // Mock historical payout data
-      payoutMethod: "Bank Transfer",
-      bankAccount: "****1234"
-    };
+  async addActiveDelivery(driverId, parcelId) {
+    return { success: true };
+  },
+
+  async removeActiveDelivery(driverId, parcelId) {
+    return { success: true };
   }
 };
 

@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSelector } from 'react-redux';
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
-
+import { AuthContext } from '@/App';
 const Header = ({ onMenuToggle }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  const { logout } = useContext(AuthContext);
 
   const notifications = [
     { Id: 1, message: "New delivery assigned to Driver #1", time: "5 min ago", type: "info" },
     { Id: 2, message: "Delivery SWR2024001234 completed", time: "15 min ago", type: "success" },
     { Id: 3, message: "Delay reported on Route #5", time: "1 hour ago", type: "warning" }
   ];
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   return (
     <header className="h-16 bg-white border-b border-secondary/10 px-6 flex items-center justify-between sticky top-0 z-40">
@@ -60,14 +67,21 @@ const Header = ({ onMenuToggle }) => {
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center gap-3 pl-4 border-l border-secondary/10">
+<div className="flex items-center gap-3 pl-4 border-l border-secondary/10">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <span className="text-sm font-bold text-white">AD</span>
+            <span className="text-sm font-bold text-white">
+              {user?.firstName?.[0] || user?.emailAddress?.[0] || 'U'}
+            </span>
           </div>
           <div className="hidden md:block">
-            <p className="text-sm font-medium text-secondary">Admin User</p>
-            <p className="text-xs text-secondary/50">admin@swiftroute.com</p>
+            <p className="text-sm font-medium text-secondary">
+              {user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'User'}
+            </p>
+            <p className="text-xs text-secondary/50">{user?.emailAddress || 'user@example.com'}</p>
           </div>
+          <Button variant="ghost" size="sm" onClick={handleLogout}>
+            <ApperIcon name="LogOut" size={16} />
+          </Button>
         </div>
       </div>
     </header>
