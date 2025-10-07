@@ -139,9 +139,9 @@ const onTimePercentage = (stats?.completedDeliveries && stats?.onTimeDeliveries)
         />
       </div>
 
-      {/* Charts */}
+{/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+        <motion.div key="volume-chart" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <Card className="p-6">
             <h3 className="font-semibold text-secondary mb-4">Delivery Volume & Revenue</h3>
             <ReactApexChart
@@ -152,8 +152,7 @@ const onTimePercentage = (stats?.completedDeliveries && stats?.onTimeDeliveries)
             />
           </Card>
         </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+<motion.div key="delay-chart" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <Card className="p-6">
             <h3 className="font-semibold text-secondary mb-4">Delay Analysis</h3>
             <ReactApexChart
@@ -165,9 +164,8 @@ const onTimePercentage = (stats?.completedDeliveries && stats?.onTimeDeliveries)
           </Card>
         </motion.div>
       </div>
-
-      {/* Hourly Distribution */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+{/* Hourly Distribution */}
+      <motion.div key="hourly-chart" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
         <Card className="p-6">
           <h3 className="font-semibold text-secondary mb-4">Hourly Distribution</h3>
           <ReactApexChart
@@ -178,9 +176,8 @@ const onTimePercentage = (stats?.completedDeliveries && stats?.onTimeDeliveries)
           />
         </Card>
       </motion.div>
-
-      {/* Driver Performance */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+{/* Driver Performance */}
+      <motion.div key="driver-performance" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
         <Card className="p-6">
           <h3 className="font-semibold text-secondary mb-4">Driver Performance Rankings</h3>
           <div className="overflow-x-auto">
