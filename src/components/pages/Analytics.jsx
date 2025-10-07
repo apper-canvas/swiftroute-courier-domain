@@ -59,11 +59,10 @@ const volumeChartOptions = (volumes = []) => ({
     stroke: { curve: "smooth", width: 2 },
     fill: { type: "gradient", gradient: { opacityFrom: 0.6, opacityTo: 0.1 } },
     xaxis: { categories: volumes.map(v => v?.date?.slice(5) || 'N/A'), labels: { style: { colors: "#475569" } } },
-    yaxis: { labels: { style: { colors: "#475569" } } },
+yaxis: { labels: { style: { colors: "#475569" } } },
     tooltip: { theme: "light" },
     legend: { position: "top" }
-  };
-
+  });
 const volumeChartSeries = (volumes = []) => [
     { name: "Deliveries", data: volumes.map(v => v?.deliveries || 0) },
     { name: "Revenue", data: volumes.map(v => Math.round((v?.revenue || 0) / 10)) }
